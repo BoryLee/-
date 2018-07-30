@@ -20,3 +20,26 @@ function ES6RemoveSameItemInArray(array) {
 }
 
 console.log(ES6RemoveSameItemInArray([1, 2, 3, 4, 1, 3, 7]));
+
+/**
+ *  n 的阶乘
+ * @param {*} n
+ * @returns
+ */
+function factorial(n) {
+  return n > 1 ? n * factorial(n - 1) : n;
+}
+console.log(factorial(10));
+
+/**
+ *   彻底冻结对象 即对象不可修改
+ * @param {*} obj
+ */
+function constantize(obj) {
+  Object.freeze(obj);
+  Object.keys(obj).forEach((key, i) => {
+    if (typeof obj[key] === "object") {
+      Object.freeze(obj[key]);
+    }
+  });
+}
