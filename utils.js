@@ -59,3 +59,21 @@ function decimation(x) {
 }
 
 console.log(decimation(9.6));
+
+/**
+ * 判断一个数到底是正数、负数、还是零
+ * @param {*} num
+ */
+function judgeIsNumber(num) {
+  Math.sign =
+    Math.sign ||
+    function(num) {
+      num = +num;
+      if (num === 0 || isNaN(num)) {
+        return num;
+      }
+      return num > 0 ? 1 : -1;
+    };
+  return Math.sign(num);
+}
+console.log(judgeIsNumber("123abc"));
