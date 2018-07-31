@@ -26,10 +26,45 @@ console.log(ES6RemoveSameItemInArray([1, 2, 3, 4, 1, 3, 7]));
  * @param {*} n
  * @returns
  */
-function factorial(n) {
-  return n > 1 ? n * factorial(n - 1) : n;
+function ES5_factorial(n) {
+  if (n === 1) return 1;
+  return n * ES5_factorial(n - 1);
 }
-console.log(factorial(10));
+
+console.log(ES5_factorial(10));
+/**
+ * 尾递归 n 的阶乘
+ * @param {*} n
+ * @param {*} total
+ */
+function ES6_factorial(n, total = 1) {
+  if (n === 1) return total;
+  return ES6_factorial(n - 1, n * total);
+}
+console.log(ES6_factorial(10));
+
+/**
+ * 非尾递归的 Fibonacci 数列
+ * @param {*} n
+ */
+function Fibonacci(n) {
+  if (n <= 1) {
+    return 1;
+  }
+  return Fibonacci(n - 1) + Fibonacci(n - 2);
+}
+/**
+ * 尾递归优化过的 Fibonacci 数列
+ * @param {*} n
+ * @param {*} ac1
+ * @param {*} ac2
+ */
+function Fibonacci2(n, ac1 = 1, ac2 = 1) {
+  if (n <= 1) {
+    return ac2;
+  }
+  return Fibonacci2(n - 1, ac2, ac1 + ac2);
+}
 
 /**
  *   彻底冻结对象 即对象不可修改
