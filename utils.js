@@ -23,6 +23,7 @@ console.log(ES6RemoveSameItemInArray([1, 2, 3, 4, 1, 3, 7]));
 
 /**
  *  n 的阶乘
+ * 会造成内存泄漏
  * @param {*} n
  * @returns
  */
@@ -45,6 +46,7 @@ console.log(ES6_factorial(10));
 
 /**
  * 非尾递归的 Fibonacci 数列
+ * 会造成内存泄漏
  * @param {*} n
  */
 function Fibonacci(n) {
