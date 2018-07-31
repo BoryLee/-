@@ -43,3 +43,19 @@ function constantize(obj) {
     }
   });
 }
+
+/**
+ * 去除一个数的小数部分，返回整数部分
+ * @param {*} x
+ */
+function decimation(x) {
+  Math.trunc =
+    Math.trunc ||
+    function(x) {
+      return x < 0 ? Math.ceil(x) : Math.floor(x);
+    };
+
+  return Math.trunc(x);
+}
+
+console.log(decimation(9.6));
