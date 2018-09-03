@@ -114,3 +114,14 @@ function judgeIsNumber(num) {
   return Math.sign(num);
 }
 console.log(judgeIsNumber("123abc"));
+
+/**
+ * 将类似数组转为数组
+ * @param {*} obj
+ */
+function likeArrayConvertToArray(obj) {
+  if (Array.from) {
+    return Array.from(obj);
+  }
+  return [].slice.call(obj);
+}
