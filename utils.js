@@ -125,3 +125,17 @@ function likeArrayConvertToArray(obj) {
   }
   return [].slice.call(obj);
 }
+
+/**
+ * 统计字符串出现的次数
+ *
+ * @param {*} value
+ */
+function staticCountInString(value) {
+  const array = value.split("");
+  let obj = array.reduce((a, b) => {
+    return a[b]++ || (a[b] = 1), a;
+  }, {});
+  return obj;
+}
+console.log(staticCountInString("aaaaabbbbcccdddeeefoaklasaslals"));
