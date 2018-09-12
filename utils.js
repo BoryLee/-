@@ -14,13 +14,27 @@ function ES5RemoveSameItemInArray(array) {
 
   return array;
 }
+function SecondES5RemoveSameItemInArray(array) {
+  var array1 = array.filter(function(value, index, self) {
+    return self.indexOf(value) === index;
+  });
+  return array1;
+}
+console.log(
+  ES5RemoveSameItemInArray(["a", "b", "c", "d", "d", "a", "e", "g", "a"])
+);
+
+console.log(
+  SecondES5RemoveSameItemInArray(["a", "b", "c", "d", "d", "a", "e", "g", "a"])
+);
 
 function ES6RemoveSameItemInArray(array) {
   return [...new Set(array)];
 }
 
-console.log(ES6RemoveSameItemInArray([1, 2, 3, 4, 1, 3, 7]));
-
+console.log(
+  ES6RemoveSameItemInArray(["a", "b", "c", "d", "d", "a", "e", "g", "a"])
+);
 /**
  *  n 的阶乘
  * 会造成内存泄漏
