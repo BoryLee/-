@@ -127,7 +127,7 @@ function likeArrayConvertToArray(obj) {
 }
 
 /**
- * 统计字符串出现的次数
+ * 统计字符串中字符出现的次数
  *
  * @param {*} value
  */
