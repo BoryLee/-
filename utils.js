@@ -153,3 +153,19 @@ function staticCountInString(value) {
   return obj;
 }
 console.log(staticCountInString("aaaaabbbbcccdddeeefoaklasaslals"));
+
+function bubbleSort(array) {
+  for (var i = 0; i < array.length - 1; i++) {
+    //趟数
+    for (var j = array.length - 1; j > 0; j--) {
+      //比较次数
+      if (array[j] > array[j - 1]) {
+        var temp = array[j];
+        array[j] = array[j - 1];
+        array[j - 1] = temp;
+      }
+    }
+  }
+  return array;
+}
+console.log(bubbleSort([345, 234, 123, 110, 90, 10, 0, 600]));
