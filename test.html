@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./utils.js"></script>
+</head>
+
+<body>
+    <script>
+        function timestampChangedToDate(timestamp) {
+            let date = new Date(timestamp);
+            const year = date.getFullYear();
+            const month = date.getMonth() + 1;
+            const day = date.getDate();
+            const hour = date.getHours();
+            const minute = date.getMinutes();
+            const second = date.getSeconds();
+            return year + '-' + addZero(month) + '-' + addZero(day) + ' ' + addZero(hour) + ':' + addZero(minute) + ':' + addZero(second);
+        }
+        const addZero = (num) => {
+            return num < 10 ? '0' + num : num;
+        }
+        function changeJourneyBoard(arr) {
+            let newArray = [];
+            for (let i = 0, len = arr.length; i < len; i++) {
+                if ((i + 1) != len) {
+                    if (arr[i].time && !arr[i + 1].time) {
+                        arr[i]["state"] = 1;
+                    } else {
+                        arr[i]["state"] = 0;
+                    }
+                } else {
+                    if (arr[len - 1].time) {
+                        arr[i]["state"] = 1;
+                    } else {
+                        arr[i]["state"] = 0;
+                    }
+                }
+                newArray.push(arr[i])
+            }
+            let secondNewArray = [];
+            for (let j = 0, newLen = newArray.length; j < newLen; j++) {
+                const item = newArray[j];
+                let imageSrc = '';
+                switch (item.statusCode) {
+                    case 'YBA':
+                        imageSrc = (item.state === 1 ? '../../images/mileage_reported@2x.png' : '../../images/mileage_reported_gray@2x.png');
+                        break;
+                    case 'LPCLZ':
+                        imageSrc = (item.state === 1 ? '../../images/mileage_process@2x.png' : '../../images/mileage_process_gray@2x.png');
+                        break;
+                    case 'FQSPCLZ':
+                        imageSrc = (item.state === 1 ? '../../images/mileage_process@2x.png' : '../../images/mileage_process_gray@2x.png');
+                        break;
+                    case 'LPCLZXXPF':
+                        imageSrc = (item.state === 1 ? '../../images/mileage_advance_payments@2x.png' : '../../images/mileage_advance_payments_gray@2x.png');
+                        break;
+                    case 'DZF':
+                        imageSrc = (item.state === 1 ? '../../images/mileage_unpay@2x.png' : '../../images/mileage_unpay_gray@2x.png');
+                        break;
+                    case 'YZF':
+                        imageSrc = (item.state === 1 ? '../../images/mileage_paid@2x.png' : '../../images/mileage_paid_gray@2x.png');
+                        break;
+                    case 'YWC':
+                        imageSrc = (item.state === 1 ? '../../images/mileage_finished@2x.png' : '../../images/mileage_finished_gray@2x.png');
+                        break;
+                    case 'FQSP':
+                        imageSrc = (item.state === 1 ? '../../images/mileage_cancel_claimcase@2x.png' : '../../images/mileage_cancel_claimcase_gray@2x.png');
+                        break;
+                    default:
+                }
+                item['imageSrc'] = imageSrc;
+                if (item.time) {
+                    item['date'] = timestampChangedToDate(item.time);
+                } else {
+                    item['date'] = item.time
+                }
+                secondNewArray.push(item);
+            }
+            return secondNewArray;
+        }
+
+        const array = [
+            {
+                status: '已报案',
+                statusCode: 'YBA',
+                time: 1536737941145
+            },
+            {
+                status: '理赔处理中',
+                statusCode: 'LPCLZ',
+                time: 1536737941145
+            },
+            {
+                status: '待支付',
+                statusCode: 'DZF',
+                time: 1536737941145
+            },
+            {
+                status: '已支付',
+                statusCode: 'YZF',
+                time: 1536737941145
+            },
+            {
+                status: '已完成',
+                statusCode: 'YZF',
+                time: 1536737941145
+            }
+        ]
+        // function formatPhone(phoneNum) {
+        //     if (!phoneNum) return;
+        //     var phone = phoneNum.toString();
+        //     return phone.length === 11 ? phone.slice(0, 3) + '****' + phone.slice(phone.length - 3) : phone;
+        // }
+
+
+        console.log(changeJourneyBoard(array));
+        // document.onclick = function (e) {
+        //     console.log(e);
+        // }
+        var name = 'bory';
+        var obj = {
+            name: 'hello',
+            test: function () {
+                return this.name;
+            }
+        }
+        var test = obj.test;
+
+        console.log(obj.test());
+        console.log(test())
+    </script>
+
+</body>
+
+</html>

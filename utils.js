@@ -1,4 +1,44 @@
 /**
+ *  从数组中书删除某个元素
+ */
+function removeItemFromArray(arr, item) {
+  if (arr.length) {
+    var index = arr.indexOf(item);
+    if (index > -1) {
+      return arr.splice(index, 1);
+    }
+  }
+}
+
+/**
+ *  类数组转为数组
+ * @param {*} list 
+ * @param {*} start 
+ */
+function arrayLikeConvertToArray(list, start) {
+  start = start || 0;
+  var i = list.length - start;
+  var ret = new Array(i);
+  while (i--) {
+    ret[i] = list[i + start];
+  }
+  return ret;
+}
+
+/**
+ * 将from对象合并到to对象中
+ * 
+ * @param {*} to 
+ * @param {*} from 
+ */
+function extend(to, from) {
+  for (var key in from) {
+    to[key] = from[key]
+  }
+  return to;
+}
+
+/**
  * 数组去重
  * @param {*} array
  */
@@ -11,11 +51,10 @@ function ES5RemoveSameItemInArray(array) {
       }
     }
   }
-
   return array;
 }
 function SecondES5RemoveSameItemInArray(array) {
-  var array1 = array.filter(function(value, index, self) {
+  var array1 = array.filter(function (value, index, self) {
     return self.indexOf(value) === index;
   });
   return array1;
@@ -102,7 +141,7 @@ function constantize(obj) {
 function decimation(x) {
   Math.trunc =
     Math.trunc ||
-    function(x) {
+    function (x) {
       return x < 0 ? Math.ceil(x) : Math.floor(x);
     };
 
@@ -118,7 +157,7 @@ console.log(decimation(9.6));
 function judgeIsNumber(num) {
   Math.sign =
     Math.sign ||
-    function(num) {
+    function (num) {
       num = +num;
       if (num === 0 || isNaN(num)) {
         return num;
@@ -169,3 +208,20 @@ function bubbleSort(array) {
   return array;
 }
 console.log(bubbleSort([345, 234, 123, 110, 90, 10, 0, 600]));
+
+/**
+ * 兼容bind函数
+ * call  apply  bind  改变this指向
+ */
+function fullBindFunction() {
+  if (!Function.prototype.bind) {
+    Function.prototype.bind = function (This) {
+      var bindThis = this;
+      var arr = [].slice.call(arguments, 1);
+      return function () {
+        bindThis.apply(This, arr);
+      };
+    };
+  }
+}
+
